@@ -62,7 +62,7 @@ export function PostProvider({ children }) {
             else if (path.startsWith("/posts")) {
                 console.log("hi in posts");
                 result = await axios.get(
-                    `http://localhost:3000/post?pageNumber=${page}`
+                    `${import.meta.env.VITE_BASE_URL}/post?pageNumber=${page}`
                 );
                 let newPosts = result.data || [];
                 if (newPosts.length === 0) {
