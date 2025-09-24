@@ -1,14 +1,22 @@
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-dotenv.config()
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const DBURI = `${process.env.MONGODB_URI}`
-const connection = ()=>{
-  mongoose.connect(DBURI).then(()=>{
-    console.log("Good Connection")
-  }).catch(()=>{
-    console.log("Bad connection")
-  })
-}
+dotenv.config();
 
-export default connection
+const DBURI = process.env.MONGODB_URI;
+
+const connection = () => {
+  mongoose
+    .connect(DBURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("✅ Good Connection to MongoDB");
+    })
+    .catch((err) => {
+      console.error("❌ Bad connection to MongoDB:", err.message);
+    });
+};
+
+export default connection;
