@@ -35,6 +35,6 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(notFoundHandler)
 app.use(errorHandler)
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`http://localhost:${process.env.PORT || 3000}`);
 });
