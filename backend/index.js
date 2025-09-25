@@ -24,11 +24,8 @@ const allowedOrigins = [
 ];
 app.use(cors({
   origin: allowedOrigins,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
-}));
-app.options("*", cors()); // connect with frontend
+})); // connect with frontend
 app.use(helmet()) // security headers
 app.use(hpp()) // prevent pollution params
 app.use(limit({
