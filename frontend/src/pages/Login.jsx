@@ -39,7 +39,7 @@ export default function Login() {
             let res = await axios.post(`${baseUrl}/user/login`, {
                 email: input.email,
                 password: input.password,
-            });
+            },{ withCredentials: true });
 
             console.log("✅ Login:", res.data); // TODO: replace with alert
 
