@@ -21,7 +21,8 @@ const app = express();
 // Middleware
 const allowedOrigins = [
   "https://hanfy-blog.netlify.app",
-  "http://localhost:5173"
+  "http://localhost:5173",
+  "https://blog-app-git-main-ahmeds-projects-c19f222d.vercel.app"
 ];
 
 app.use(cors({
