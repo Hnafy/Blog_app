@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { errorHandler, notFoundHandler } from './middleware/error.js';
 import cors from 'cors';
-// import helmet from 'helmet';
+import helmet from 'helmet';
 import hpp from 'hpp';
 import rateLimit from 'express-rate-limit';
 
@@ -19,24 +19,16 @@ db();
 const app = express();
 
 // Middleware
-const allowedOrigins = [
-  "https://hanfy-blog.netlify.app",
-  "http://localhost:5173",
-  "https://blog-app-git-main-ahmeds-projects-c19f222d.vercel.app"
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true
+  origin: [
+    "https://hanfy-blog.netlify.app",
+    "http://localhost:5173",
+    "https://blog-app-git-main-ahmeds-projects-c19f222d.vercel.app"
+  ],
+  credentials: true,
 }));
 
-// app.use(helmet());
+app.use(helmet());
 app.use(hpp());
 
 app.use(rateLimit({
