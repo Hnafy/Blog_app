@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { errorHandler, notFoundHandler } from './middleware/error.js';
 import cors from 'cors';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import hpp from 'hpp';
 import rateLimit from 'express-rate-limit';
 
