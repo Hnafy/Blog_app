@@ -9,9 +9,9 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { errorHandler, notFoundHandler } from './middleware/error.js';
 import cors from 'cors';
-// import helmet from 'helmet';
-// import hpp from 'hpp';
-// import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import rateLimit from 'express-rate-limit';
 
 dotenv.config();
 db();
@@ -32,13 +32,13 @@ app.use(cors({
 }));
 
 
-// app.use(helmet());
-// app.use(hpp());
+app.use(helmet());
+app.use(hpp());
 
-// app.use(rateLimit({
-//   windowMs: 10 * 60 * 1000, // 10 minutes
-//   max: 200
-// }));
+app.use(rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 200
+}));
 
 app.use(express.json());
 
