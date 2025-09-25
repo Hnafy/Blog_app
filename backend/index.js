@@ -1,47 +1,68 @@
-import express, { json } from 'express'
-import db from './db.js'
-import user from './routes/user.js'
-import post from './routes/post.js'
-import comment from './routes/comment.js'
-import category from './routes/category.js'
-import dotenv from 'dotenv'
-dotenv.config()
+import express from 'express';
+import db from './db.js';
+import user from './routes/user.js';
+import post from './routes/post.js';
+import comment from './routes/comment.js';
+import category from './routes/category.js';
+import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
-import { errorHandler , notFoundHandler } from './middleware/error.js'
-import cors from 'cors'
-import helmet from 'helmet'
-import hpp from 'hpp'
-import limit from 'express-rate-limit'
+import { errorHandler, notFoundHandler } from './middleware/error.js';
+import cors from 'cors';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import rateLimit from 'express-rate-limit';
 
-db()
-const app = express()
+dotenv.config();
+db();
 
-// middleware
+const app = express();
+
+// Middleware
 const allowedOrigins = [
-  "https://hanfy-blog.netlify.app", // website
-  "http://localhost:5173"           // localhost
+  "https://hanfy-blog.netlify.app",
+  "http://localhost:5173"
 ];
+
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
-})); // connect with frontend
-app.use(helmet()) // security headers
-app.use(hpp()) // prevent pollution params
-app.use(limit({
-  windowMs: 10*60*1000, // 10 minutes
-  max:200
-})) // limit requests
-app.use(express.json())
-app.use("/user",user)
-app.use("/post",post)
-app.use("/comment",comment)
-app.use("/category",category)
+}));
+
+app.use(helmet());
+app.use(hpp());
+
+app.use(rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 200
+}));
+
+app.use(express.json());
+
+// Routes
+app.use("/user", user);
+app.use("/post", post);
+app.use("/comment", comment);
+app.use("/category", category);
+
+// Static files
 const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use(notFoundHandler)
-app.use(errorHandler)
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`http://localhost:${process.env.PORT || 3000}`);
-});
+// Error handlers
+app.use(notFoundHandler);
+app.use(errorHandler);
+
+// ❌ ممنوع app.listen() في Vercel
+// app.listen(process.env.PORT || 3000, () => {
+//   console.log(`http://localhost:${process.env.PORT || 3000}`);
+// });
+
+// ✅ Export app for Vercel
+export default app;
