@@ -36,14 +36,14 @@ export function AuthProvider({ children }) {
         // verify token to get userId
         const verifyRes = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/user/verify`,
-          { headers: { token } }
+          { headers: { token },withCredentials: true }
         );
         const userId = verifyRes.data.decoded.id;
 
         // fetch full user profile
         const userRes = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/user/${userId}`,
-          { headers: { token } }
+          { headers: { token },withCredentials: true }
         );
 
         setUser(userRes.data); // will also save to localStorage
@@ -68,7 +68,7 @@ export function AuthProvider({ children }) {
 
     const res = await axios.get(
       `${import.meta.env.VITE_BASE_URL}/user/${userId}`,
-      { headers: { token } }
+      { headers: { token },withCredentials: true }
     );
     setUser(res.data); // triggers localStorage update
     setAlert({

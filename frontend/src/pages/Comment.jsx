@@ -60,6 +60,7 @@ export default function Comment() {
                     headers: {
                         token: token,
                     },
+                    withCredentials: true
                 }
             );
 
@@ -91,6 +92,7 @@ export default function Comment() {
                     headers: {
                         token: token,
                     },
+                    withCredentials: true
                 }
             );
             setComments((prevComments) =>
@@ -118,6 +120,7 @@ export default function Comment() {
                     headers: {
                         token: token,
                     },
+                    withCredentials: true
                 }
             );
             setComments((prevComments) => [

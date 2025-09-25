@@ -79,6 +79,7 @@ export function PostProvider({ children }) {
                     `${import.meta.env.VITE_BASE_URL}/post/userBookMark`,
                     {
                         headers: { token: token },
+                        withCredentials: true
                     }
                 );
                 setPosts(res.data);

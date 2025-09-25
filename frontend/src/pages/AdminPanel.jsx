@@ -22,6 +22,7 @@ export default function AdminPanel() {
                     `${import.meta.env.VITE_BASE_URL}/user`,
                     {
                         headers: { token: token },
+                        withCredentials: true
                     }
                 );
                 setUsers(res.data);
@@ -55,6 +56,7 @@ export default function AdminPanel() {
                     },
                     {
                         headers: { token: token },
+                        withCredentials: true
                     }
                 );
                 setInputs({ user: "", email: "", password: "" });
@@ -80,6 +82,7 @@ export default function AdminPanel() {
                     `${import.meta.env.VITE_BASE_URL}/user/${id}`,
                     {
                         headers: { token: token },
+                        withCredentials: true
                     }
                 );
                 setUsers((prev) => prev.filter((u) => u._id !== id));

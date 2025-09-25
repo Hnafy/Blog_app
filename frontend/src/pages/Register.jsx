@@ -58,6 +58,7 @@ export default function Register() {
                             "Content-Type": "multipart/form-data",
                             token: res.data.token,
                         },
+                        withCredentials: true
                     }
                 );
                 console.log("✅ Registered:", resAvatar.data);

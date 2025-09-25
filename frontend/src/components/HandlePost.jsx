@@ -47,6 +47,7 @@ export default function HandlePost() {
                         `${import.meta.env.VITE_BASE_URL}/post/${postId}`,
                         {
                             headers: { token: token },
+                            withCredentials: true
                         }
                     );
                     // console.log(postData.data);
@@ -101,6 +102,7 @@ export default function HandlePost() {
                             "Content-Type": "multipart/form-data",
                             token: token,
                         },
+                        withCredentials: true
                     }
                 );
                 console.log(res.data);
@@ -134,6 +136,7 @@ export default function HandlePost() {
                     },
                     {
                         headers: { token: token },
+                        withCredentials: true
                     }
                 );
             
@@ -152,6 +155,7 @@ export default function HandlePost() {
                                 "Content-Type": "multipart/form-data",
                                 token: token,
                             },
+                            withCredentials: true
                         }
                     );
             

@@ -22,6 +22,7 @@ export default function Dialog() {
                 `${import.meta.env.VITE_BASE_URL}/post/${postId}`,
                 {
                     headers: { token: token },
+                    withCredentials: true
                 }
             );
             console.log(res.data.msg);

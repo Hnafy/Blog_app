@@ -37,6 +37,7 @@ export default function Post({ post,onRemoveBookmark }) {
                 },
                 {
                     headers: { token: token },
+                    withCredentials: true
                 }
             );
             console.log(res.data.msg);
@@ -55,6 +56,7 @@ export default function Post({ post,onRemoveBookmark }) {
                 },
                 {
                     headers: { token: token },
+                    withCredentials: true
                 }
             );
             console.log(res.data.msg);
