@@ -21,21 +21,14 @@ const app = express();
 app.set("trust proxy", 1);
 // Middleware
 app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      "https://hanfy-blog.netlify.app",
-      "http://localhost:5173",
-      "https://blog-app-git-main-ahmeds-projects-c19f222d.vercel.app"
-    ];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: [
+    "https://hanfy-blog.netlify.app",
+    "http://localhost:5173",
+    "https://blog-app-gray-theta.vercel.app"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization", "token"],
+  credentials: true
 }));
 
 

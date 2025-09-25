@@ -54,7 +54,8 @@ export function PostProvider({ children }) {
                     `${import.meta.env.VITE_BASE_URL}/user/${userId}`,
                     {
                         headers: { token: token },
-                    }
+                        withCredentials: true
+                    },
                 );
                 setUser(result.data);
                 setPosts(result.data.posts || []);
