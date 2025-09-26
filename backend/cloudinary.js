@@ -1,50 +1,45 @@
+// cloudinary.js
 import { v2 as cloudinary } from "cloudinary";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 dotenv.config();
 
-// Configuration
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-async function cloudinaryUploadImage(imageName) {
-    // Upload an image
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    const uploadResult = await cloudinary.uploader
-        .upload(
-            path.join(__dirname, "/uploads/", imageName), // imageName>> ${req.file.filename}
-            {
-                public_id: imageName,
+async function cloudinaryUploadImage(fileBuffer, filename) {
+    return new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+            { public_id: filename },
+            (error, result) => {
+                if (error) return reject(error);
+                resolve(result);
             }
-        )
-        .catch((error) => {
-            console.log(error);
-        });
-
-    return uploadResult;
+        );
+        uploadStream.end(fileBuffer);
+    });
 }
-
 async function cloudinaryDeleteImage(publicId) {
-    // delete an image
     try {
-        const deleteImage = await cloudinary.uploader.destroy(publicId);
-        return deleteImage;
+        const result = await cloudinary.uploader.destroy(publicId);
+        return result; // { result: 'ok' } if deleted successfully
     } catch (err) {
-        return err;
+        throw new Error(err.message || "Cloudinary delete error");
     }
 }
 async function cloudinaryDeleteArrayOfImage(publicIds) {
-    // delete all images
     try {
-        const deleteImages = await cloudinary.v2.api.delete_resources(publicIds)
-        return deleteImages;
+        const result = await cloudinary.api.delete_resources(publicIds);
+        return result; // { deleted: { "id1": "deleted", "id2": "deleted" } }
     } catch (err) {
-        return err;
+        throw new Error(err.message || "Cloudinary bulk delete error");
     }
 }
 
-export { cloudinaryUploadImage, cloudinaryDeleteImage,cloudinaryDeleteArrayOfImage };
+export {
+    cloudinaryUploadImage,
+    cloudinaryDeleteImage,
+    cloudinaryDeleteArrayOfImage,
+};
