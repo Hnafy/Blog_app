@@ -89,7 +89,7 @@ export default function AdminPanel() {
                 setAlert({
                     visible: true,
                     type: "danger",
-                    message: res.data.message,
+                    message: res.data.msg,
                 });
             } catch (err) {
                 console.log(err);
