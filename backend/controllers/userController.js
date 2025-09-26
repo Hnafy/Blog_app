@@ -78,6 +78,7 @@ export let registerUser = async (req, res) => {
         res.status(500).json(err.message);
     }
 };
+
 // login user
 export let loginUser = async (req, res) => {
     try {
@@ -109,30 +110,37 @@ export let loginUser = async (req, res) => {
     }
 };
 
-// delete user
 export let deleteUser = async (req, res) => {
     try {
         // find user
         let findUser = await userModel.findById(req.params.id);
         if (!findUser) {
-            res.status(404).send("this email isn't exist");
+            return res.status(404).json({ msg: "User not found" });
         }
-        // delete user
-        await userModel.findByIdAndDelete(req.params.id);
-        // delete avatar for user
-        if (findUser.profilePhoto.publicId !== null) {
+        // delete avatar for user (if exists)
+        if (findUser.profilePhoto?.publicId) {
             await cloudinaryDeleteImage(findUser.profilePhoto.publicId);
         }
-        // delete all image for user
-        let posts = await postModel.find({ userId: req.user.id });
-        let publicIds = posts.map((post) => post.image.publicId);
-        await cloudinaryDeleteArrayOfImage(publicIds);
+        // find all posts for this user
+        let posts = await postModel.find({ user: findUser._id });
+        if (posts.length > 0) {
+            let publicIds = posts
+                .map((post) => post.image?.publicId)
+                .filter(Boolean);
+            if (publicIds.length > 0) {
+                await cloudinaryDeleteArrayOfImage(publicIds);
+            }
+        }
         // delete post and comment for this user
         await commentModel.deleteMany({ user: findUser._id });
         await postModel.deleteMany({ user: findUser._id });
-        res.status(201).send({ message: "the email had deleted successfully" });
+        // finally delete user
+        await userModel.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            msg: "User and all related data deleted successfully",
+        });
     } catch (err) {
-        res.status(500).json(err.message);
+        res.status(500).json({ msg: err.message });
     }
 };
 
