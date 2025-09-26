@@ -15,7 +15,7 @@ export default function Hero() {
     return (
         <>
             {/* hero container */}
-            <div className="relative h-[calc(100vh-130px)] overflow-hidden font-family-base text-text text-5xl flex flex-col justify-center items-center w-full lg:text-8xl">
+            <div className="absolute right-0 h-[calc(100vh-130px)] overflow-hidden font-family-base text-text text-5xl flex flex-col justify-center items-center w-full lg:text-8xl">
                 <h2 className="leading-16 flex text-5xl flex-col items-center justify-center md:flex-row md:gap-3">
                     <span>A Space For</span>
                     <span className="relative text-primary font-bold">
