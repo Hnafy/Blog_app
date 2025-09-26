@@ -56,7 +56,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// ❌ ممنوع app.listen() في Vercel
+// ❌ Vercel prevent app.listen
 // app.listen(process.env.PORT || 3000, () => {
 //   console.log(`http://localhost:${process.env.PORT || 3000}`);
 // });
