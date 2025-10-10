@@ -83,7 +83,7 @@ export default function Post({ post,onRemoveBookmark }) {
     // console.log("userProfile",userProfile )
 
     return (
-        <div className="min-h-[200px] md:min-h-[300px] mt-10 bg-surface text-text border border-gray-500/20 rounded-md md:px-4 px-3 py-2">
+        <div className="min-h-[200px] w-[300px] md:min-h-[300px] mt-10 bg-surface text-text border border-gray-500/20 rounded-md md:px-4 px-3 py-2">
             {/* post image */}
             <div className="group cursor-pointer w-full h-[200px] flex justify-center mb-5">
                 <img

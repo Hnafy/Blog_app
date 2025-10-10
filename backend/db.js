@@ -11,8 +11,6 @@ const connection = () => {
     return;
   }
 
-  console.log("Mongo URI:", DBURI);
-
   mongoose
     .connect(DBURI, {
       useNewUrlParser: true,

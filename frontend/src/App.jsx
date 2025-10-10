@@ -22,7 +22,7 @@ function App() {
     return (
         <>
             {/* container */}
-            <div className="dark bg-background min-h-screen items-start text-text w-full flex flex-col px-20">
+            <div className="dark bg-background min-h-screen items-start text-text w-full flex flex-col px-5 md:px-20">
                 <AlertProvider>
                     <AuthProvider>
                         <Nav />
