@@ -3,13 +3,13 @@
 <div align="center">
 
   <a href="">
-    <img src="" width="400" alt="Homepage Screenshot">
+    <img src="https://raw.githubusercontent.com/Hnafy/Blog_app/refs/heads/main/image/image1.png" width="400" alt="Homepage Screenshot">
   </a>
 
 <br><br>
 
   <a href="">
-    <img src="" width="400" alt="Dashboard Page">
+    <img src="https://raw.githubusercontent.com/Hnafy/Blog_app/refs/heads/main/image/image2.png" width="400" alt="Dashboard Page">
   </a>
 
 </div>
