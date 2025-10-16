@@ -23,7 +23,7 @@
 <p align="center">
   A full-featured blogging web app built with the MERN stack that allows users to read, create, edit, and manage blog posts with authentication and a rich editor experience.
   <br />
-  <a href="https://github.com/Hnafy/Blog_app"><strong>View Demo »</strong></a>
+  <a href="https://hanfy-blog.netlify.app"><strong>View Demo »</strong></a>
   <br />
   <br />
   <a href="https://github.com/Hnafy/Blog_app/issues/new?labels=bug">Report Bug</a>
